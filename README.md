@@ -27,4 +27,4 @@
     iniciar
     ```
 
-    digite "iniciar" para numero de whatsapp que escaneou, ele é BOT 🤖
+    digite "iniciar" de um outro telefone para o seu numero de whatsapp, que você escaneou, ele será o BOT 🤖

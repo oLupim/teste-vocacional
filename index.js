@@ -171,7 +171,7 @@ client.on('message', async msg => {
   if (from.endsWith('@g.us')) return;
 
   // Comando para começar/reiniciar o teste
-  if (body === 'começar' || body === 'iniciar' || body === 'teste') {
+  if (body === 'iniciar' || body === 'começar' || body === 'comecar') {
     sessions[from] = {
       currentQuestionId: 1,
     };
