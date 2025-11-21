@@ -118,11 +118,16 @@ function formatQuestion(questionId) {
   return msg;
 }
 
+// Pergunta 1:
+// 1) Lidar com máquinas
+// 2) Lidar com pessoas
+// Responda com o *número* da opção.
+
 function processAnswer(questionId, answerNumber) {
   const q = DECISION_TREE[questionId];
   if (!q) return null;
 
-  const index = answerNumber - 1;
+  const index = answerNumber - 1; //💡
   const option = q.options[index];
   if (!option) return null;
 
@@ -144,7 +149,7 @@ function processAnswer(questionId, answerNumber) {
 }
 
 // =================== SESSÕES ===================
-// sessions[whatsappNumber] = { currentQuestionId }
+// sessions[whatsappNumber] = { user1, user2, ... }
 const sessions = {};
 
 // =================== WHATSAPP CLIENT ===================
@@ -167,8 +172,11 @@ client.on('message', async msg => {
   const bodyRaw = msg.body.trim();
   const body = bodyRaw.toLowerCase();
 
-  // Opcional: ignorar grupos
+  // ignorar grupos
   if (from.endsWith('@g.us')) return;
+
+
+
 
   // Comando para começar/reiniciar o teste
   if (body === 'iniciar' || body === 'começar' || body === 'comecar') {
@@ -186,11 +194,11 @@ client.on('message', async msg => {
     return;
   }
 
-  // Se não existe sessão, pede pra digitar "começar"
+  // Se não existe sessão, pede pra digitar "iniciar"
   if (!sessions[from]) {
     await client.sendMessage(
       from,
-      'Oi! 😊\nPara iniciar o *Teste Vocacional em Tecnologia*, envie a palavra *começar*.'
+      'Oi! 😊\nPara iniciar o *Teste Vocacional em Tecnologia*, envie a palavra *iniciar*.'
     );
     return;
   }
@@ -199,7 +207,7 @@ client.on('message', async msg => {
   const session = sessions[from];
   const currentQuestionId = session.currentQuestionId;
 
-  // Tenta converter a resposta em número
+  // converte a resposta string em número
   const answerNumber = parseInt(bodyRaw, 10);
 
   if (isNaN(answerNumber)) {
